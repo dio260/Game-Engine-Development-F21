@@ -119,6 +119,7 @@ namespace Lab8
 
 
             Ray ray = camera.ScreenPointToWorldRay(InputManager.GetMousePosition());
+            /*
             float nearest = Single.MaxValue; // Start with highest value
             float? p;
             Collider target = null; // Assume no intersection
@@ -132,10 +133,11 @@ namespace Lab8
                 }
             if (target != null && nearest < camera.FarPlane)
             {
-                /*
                 
-                */
+                
+                
             }
+            */
 
 
             foreach (Collider collider in colliders)
@@ -143,8 +145,7 @@ namespace Lab8
                 if (collider.Intersects(ray) != null)
                 {
                     effect.Parameters["DiffuseColor"].SetValue(Color.Red.ToVector3());
-                    (model.Meshes[0].Effects[0] as BasicEffect).DiffuseColor =
-                                                 Color.Blue.ToVector3();
+                    //(model.Meshes[0].Effects[0] as BasicEffect).DiffuseColor = Color.Blue.ToVector3();
 
                     if (InputManager.IsMousePressed(0))
                     {
@@ -173,8 +174,7 @@ namespace Lab8
                 else
                 {
                     effect.Parameters["DiffuseColor"].SetValue(Color.Blue.ToVector3());
-                    (model.Meshes[0].Effects[0] as BasicEffect).DiffuseColor =
-                                                 Color.Red.ToVector3();
+                    //(model.Meshes[0].Effects[0] as BasicEffect).DiffuseColor = Color.Red.ToVector3();
                 }
 
             }
@@ -203,7 +203,7 @@ namespace Lab8
 
                 effect.Parameters["AmbientColor"].SetValue(new Vector3(0.2f, 0.2f, 0.2f));
 
-                effect.Parameters["SpecularColor"].SetValue(new Vector3(0, 0, 0.5f));
+                effect.Parameters["SpecularColor"].SetValue(new Vector3(0.5f, 0.5f, 0.5f));
 
                 effect.Parameters["DiffuseTexture"].SetValue(texture);
 

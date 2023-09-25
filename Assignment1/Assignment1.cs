@@ -60,7 +60,7 @@ namespace Assignment1
             Texture2D square = Content.Load<Texture2D>("Square");
             font = Content.Load<SpriteFont>("Font");
             Texture2D clock = Content.Load<Texture2D>("Stopwatch");
-            bonus = new Sprite(clock , new Vector2(
+            bonus = new Sprite(square , new Vector2(
                                         rnd.Next((int)clock.Width/2, GraphicsDevice.Viewport.Width - (int) (clock.Width / 2)),
                                         rnd.Next((int)clock.Height / 2, GraphicsDevice.Viewport.Height - (int)(clock.Height / 2))
                                         ));

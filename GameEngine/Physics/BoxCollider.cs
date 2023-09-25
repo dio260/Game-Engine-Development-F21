@@ -54,10 +54,10 @@ Vector3.Left,Vector3.Forward, Vector3.Backward,};
 
                         if (d < collider.Radius)
                         {
-                            Vector3 pointOnPlane = collider.Transform.Position - n * d;  // calculate the closest point
-                            float area1 = Vector3.Dot(Vector3.Cross(b - a, pointOnPlane - a), n);
-                            float area2 = Vector3.Dot(Vector3.Cross(c - b, pointOnPlane - b), n);
-                            float area3 = Vector3.Dot(Vector3.Cross(a - c, pointOnPlane - c), n);
+                            Vector3 pointOnPlane = collider.Transform.Position + (n * d);  // calculate the closest point
+                            float area1 = Vector3.Dot(Vector3.Cross(a - b, pointOnPlane - a), n);
+                            float area2 = Vector3.Dot(Vector3.Cross(b - c, pointOnPlane - b), n);
+                            float area3 = Vector3.Dot(Vector3.Cross(c - a, pointOnPlane - c), n);
                             if (!(area1 < 0 || area2 < 0 || area3 < 0))
                             {
                                 normal += n;

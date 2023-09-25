@@ -71,10 +71,11 @@ namespace CPI311.GameEngine
                 else
                     return;
             }
-            float key = node.Cost + node.Heuristic;
-            if (!openList.ContainsKey(key))
-                openList[key] = new List<AStarNode>();
-            openList[key].Add(node);
+                float key = node.Cost + node.Heuristic;
+                if (!openList.ContainsKey(key))
+                    openList[key] = new List<AStarNode>();
+                openList[key].Add(node);
+            
         }
 
         private AStarNode GetBestNode()

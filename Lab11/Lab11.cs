@@ -105,10 +105,10 @@ namespace Lab11
             // TODO: Add your drawing code here
             GraphicsDevice.DepthStencilState = new DepthStencilState();
             // Call the draw of the "current state"
-            currentScene.Draw();
-            //_spriteBatch.Begin();
-            //exit.Draw(_spriteBatch, font);
-            //_spriteBatch.End();
+            //currentScene.Draw();
+            _spriteBatch.Begin();
+            exit.Draw(_spriteBatch, font);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
@@ -116,7 +116,7 @@ namespace Lab11
         void ExitGame(GUIElement element)
         {
             background = (background == Color.White ? Color.Blue : Color.White);
-            currentScene = scenes["Play"];
+            //currentScene = scenes["Play"];
         }
         void MainMenuUpdate()
         {

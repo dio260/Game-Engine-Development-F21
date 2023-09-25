@@ -55,9 +55,11 @@ namespace Lab6
             transforms = new List<Transform>();
             rigidbodies = new List<Rigidbody>();
             colliders = new List<Collider>();
+            boxCollider = new BoxCollider();
+            boxCollider.Size = 10;
 
             //add 2 spheres - lab 6
-            /*
+
             for (int i = 0; i < 2; i++)
             {
                 Transform transform = new Transform();
@@ -82,7 +84,7 @@ namespace Lab6
 
                 
             }
-            */
+            
 
             //Lab7
             renderers = new List<Renderer>();
@@ -114,18 +116,19 @@ namespace Lab6
             //AddSphere();
             texture = Content.Load <Texture2D>("Square");
 
-            boxCollider = new BoxCollider();
-            boxCollider.Size = 10;
+            
 
             light = new Light();
             Transform lightTransform = new Transform();
             lightTransform.LocalPosition = Vector3.Backward * 10 + Vector3.Right * 5;
             light.Transform = lightTransform;
 
+            /*
             for (int i = 0; i < 5; i++)// Lab7
             {
                 AddSphere();
             }
+            */
 
         }
 
@@ -140,7 +143,7 @@ namespace Lab6
 
             if (InputManager.IsKeyPressed(Keys.Space)) //Lab7 - add more spheres if you want
             {
-                AddSphere();
+                //AddSphere();
             }
 
             foreach (Rigidbody rigidbody in rigidbodies) rigidbody.Update();
@@ -151,13 +154,14 @@ namespace Lab6
                 if (boxCollider.Collides(colliders[i], out normal))
                 {
                     numberCollisions++;
+                    
                     if (Vector3.Dot(normal, rigidbodies[i].Velocity) < 0)
                         rigidbodies[i].Impulse +=
                            Vector3.Dot(normal, rigidbodies[i].Velocity) * -2 * normal;
                 }
                 for (int j = i + 1; j < transforms.Count; j++)
                 {
-                    /* Lab 6
+                    // Lab 6
                     if (colliders[i].Collides(colliders[j], out normal))
                         numberCollisions++;
 
@@ -166,7 +170,10 @@ namespace Lab6
                            * normal * rigidbodies[i].Mass * rigidbodies[j].Mass;
                     rigidbodies[i].Impulse += velocityNormal / 2;
                     rigidbodies[j].Impulse += -velocityNormal / 2;
-                    */
+                    
+
+                    // Lab 7
+                    /*
                     if (colliders[i].Collides(colliders[j], out normal))
                     {
                         numberCollisions++;
@@ -179,13 +186,14 @@ namespace Lab6
                         rigidbodies[i].Impulse += velocityNormal / 2;
                         rigidbodies[j].Impulse += -velocityNormal / 2;
                     }
+                    */
                        
                 }
             }
 
-            
 
             base.Update(gameTime);
+
         }
 
         protected override void Draw(GameTime gameTime)
@@ -200,16 +208,16 @@ namespace Lab6
             //Lab7
             for (int i = 0; i < transforms.Count; i++)
             {
-                /*
+                
                 Transform transform = transforms[i];
                 float speed = rigidbodies[i].Velocity.Length();
                 float speedValue = MathHelper.Clamp(speed / 20f, 0, 1);
                 (model.Meshes[0].Effects[0] as BasicEffect).DiffuseColor =
                                            new Vector3(speedValue, speedValue, speedValue);
                 model.Draw(transform.World, camera.View, camera.Projection);
-                */
+                
                 //lab7
-                renderers[i].Draw();
+                //renderers[i].Draw();
             }
 
             _spriteBatch.Begin();

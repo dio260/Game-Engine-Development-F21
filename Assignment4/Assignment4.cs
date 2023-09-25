@@ -23,12 +23,12 @@ namespace Assignment4
         //Audio components
         SoundEffect gunSound, asteroidExplosion, shipExplosion;
         //SoundEffectInstance soundInstance;
-        
+
         //Visual components
         ShipAssn4 ship;
         Asteroid[] asteroidList = new Asteroid[GameConstants.NumAsteroids];
         BulletAssn4[] bulletList = new BulletAssn4[GameConstants.NumBullets];
-        
+
         //Score & background
         int score, bulletCount, asteroidCount;
         Texture2D stars;
@@ -81,11 +81,11 @@ namespace Assignment4
             //camera.Transform.LocalPosition = Vector3.Right * 5 + Vector3.Backward * 5 + Vector3.Up * 10;
             camera.Transform.LocalPosition = Vector3.Up * (GameConstants.CameraHeight);
             camera.Transform.Rotate(Vector3.Right, -MathHelper.PiOver2);
-            camera.NearPlane = GameConstants.CameraHeight - 1000f;
+            camera.NearPlane = 0.1f;//GameConstants.CameraHeight - 1000f;
             camera.FarPlane = GameConstants.CameraHeight + 1000f;
 
             ship = new ShipAssn4(Content, camera, GraphicsDevice, light);
-            
+
             for (int i = 0; i < GameConstants.NumBullets; i++)
                 bulletList[i] = new BulletAssn4(Content, camera, GraphicsDevice, light);
             for (int i = 0; i < GameConstants.NumAsteroids; i++)
@@ -124,7 +124,7 @@ namespace Assignment4
             //ship.Transform.Position += Vector3.Down;
             for (int i = 0; i < GameConstants.NumBullets; i++)
                 bulletList[i].Update();
-            for (int i = 0; i < GameConstants.NumAsteroids; i++) 
+            for (int i = 0; i < GameConstants.NumAsteroids; i++)
                 asteroidList[i].Update();
 
             if (score < 0)
@@ -136,13 +136,13 @@ namespace Assignment4
 
             if (InputManager.IsMousePressed(0))
             {
-                
+
 
                 for (int i = 0; i < GameConstants.NumBullets; i++)
                 {
                     if (!bulletList[i].isActive && bulletList[i].usable)
                     {
-                        if(sound)
+                        if (sound)
                         {
                             SoundEffectInstance soundInstance = gunSound.CreateInstance();
                             soundInstance.IsLooped = false;
@@ -150,7 +150,7 @@ namespace Assignment4
                             soundInstance.Volume = 0.7f;
                             soundInstance.Play();
                         }
-                        
+
 
                         bulletList[i].Rigidbody.Velocity =
                    (ship.Transform.Forward) * GameConstants.BulletSpeedAdjustment;
@@ -164,7 +164,7 @@ namespace Assignment4
                     }
                 }
             }
-            
+
             Vector3 normal;
             for (int i = 0; i < asteroidList.Length; i++)
                 if (asteroidList[i].isActive)
@@ -191,7 +191,7 @@ namespace Assignment4
                                 bulletList[j].usable = false;
                                 asteroidCount--;
                                 score += GameConstants.KillBonus;
-                                if(sound)
+                                if (sound)
                                 {
                                     SoundEffectInstance soundInstance = asteroidExplosion.CreateInstance();
                                     soundInstance.IsLooped = false;
@@ -199,11 +199,11 @@ namespace Assignment4
                                     soundInstance.Volume = 0.1f;
                                     soundInstance.Play();
                                 }
-                                
+
                                 break; //no need to check other bullets
                             }
-                    /*
-                    if(asteroidList[i].Collider.Collides(ship.Collider, out normal) && bulletCount != 0)
+
+                    if (asteroidList[i].Collider.Collides(ship.Collider, out normal) && bulletCount != 0)
                     {
                         Particle particle = particleManager.getNext();
                         particle.Position = ship.Transform.Position;
@@ -214,7 +214,7 @@ namespace Assignment4
                         particle.Init();
                         ship.Transform.Position = Vector3.Zero;
                         score -= GameConstants.DeathPenalty;
-                        if(sound)
+                        if (sound)
                         {
                             SoundEffectInstance soundInstance = shipExplosion.CreateInstance();
                             soundInstance.IsLooped = false;
@@ -222,10 +222,10 @@ namespace Assignment4
                             soundInstance.Volume = 0.1f;
                             soundInstance.Play();
                         }
-                        
-                    }*/
+
+                    }
                 }
-            
+
             // particles update
             particleManager.Update();
 
@@ -255,7 +255,7 @@ namespace Assignment4
                 _spriteBatch.DrawString(font, "Press Space to reset the game",
                        new Vector2(1920 / 2, 980), Color.Green);
             }
-            
+
 
             _spriteBatch.DrawString(font, "Use WASD to move",
                        new Vector2(20, 1020), Color.Green);
@@ -272,11 +272,11 @@ namespace Assignment4
 
             // ship, bullets, and asteroids
             ship.Draw();
-            for (int i = 0; i < GameConstants.NumBullets; i++) 
-                if(bulletList[i].isActive)
+            for (int i = 0; i < GameConstants.NumBullets; i++)
+                if (bulletList[i].isActive)
                     bulletList[i].Draw();
-            for (int i = 0; i < GameConstants.NumAsteroids; i++) 
-                if(asteroidList[i].isActive)
+            for (int i = 0; i < GameConstants.NumAsteroids; i++)
+                if (asteroidList[i].isActive)
                     asteroidList[i].Draw();
 
             //particle draw
@@ -289,7 +289,7 @@ namespace Assignment4
             Matrix.Invert(Matrix.CreateFromQuaternion(camera.Transform.Rotation)));
             particleEffect.Parameters["Texture"].SetValue(particleTex);
             particleManager.Draw(GraphicsDevice);
-            
+
             //...
 
             GraphicsDevice.RasterizerState = RasterizerState.CullNone;
@@ -303,8 +303,8 @@ namespace Assignment4
             float yStart = 0;
             for (int i = 0; i < GameConstants.NumAsteroids; i++)
             {
-                
-                while(xStart <= GameConstants.playerSpawnX && xStart >= -GameConstants.playerSpawnX)
+
+                while (xStart <= GameConstants.playerSpawnX && xStart >= -GameConstants.playerSpawnX)
                 {
                     double rnd = random.NextDouble();
                     if (random.Next(2) == 0)
@@ -320,7 +320,7 @@ namespace Assignment4
                     else
                         yStart = (float)rnd * GameConstants.PlayfieldSizeY;
                 }
-                    //yStart = (float)random.NextDouble() * GameConstants.PlayfieldSizeY;
+                //yStart = (float)random.NextDouble() * GameConstants.PlayfieldSizeY;
                 asteroidList[i] = new Asteroid(Content, camera, GraphicsDevice, light);
                 asteroidList[i].Transform.Position = new Vector3(xStart, 0.0f, yStart);
                 //asteroidList[i].Transform.Position = new Vector3(0, 0.0f, 0);

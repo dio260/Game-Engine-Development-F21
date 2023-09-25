@@ -207,7 +207,7 @@ namespace Assignment3
             foreach (GameObject obj in gameobjects)
             {
                 
-                
+                /*
                 if (showTextures)
                 {
                     obj.Add<Renderer>(new Renderer(model, obj.Transform, camera, Content,
@@ -218,9 +218,11 @@ namespace Assignment3
                     obj.Add<Renderer>(new Renderer(model, obj.Transform, camera, Content,
                 GraphicsDevice, light, 1, "SimpleShading", 20f, blank));
                 }
+                */
 
                 obj.Draw();
 
+                
                 if (showColors)
                 {
                     float speed = obj.Rigidbody.Velocity.Length();
@@ -282,7 +284,7 @@ namespace Assignment3
 
             Renderer renderer = new Renderer(model, gameObject.Transform, camera, Content,
             GraphicsDevice, light, 1, "SimpleShading", 20f, texture);
-            //current.Transform = gameObject.Transform;
+
             gameObject.Add<Renderer>(renderer);
 
             gameobjects.Add(gameObject);

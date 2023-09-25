@@ -43,6 +43,8 @@ namespace CPI311.GameEngine
             if (InputManager.IsKeyDown(Keys.Left)) 
             { 
                 if(InputManager.IsKeyDown(Keys.LeftShift))
+
+
                 {
                     Frequency += Time.ElapsedGameTime;
                 }

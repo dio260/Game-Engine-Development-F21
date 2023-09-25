@@ -13,7 +13,7 @@ namespace CPI311.GameEngine.Physics
         {
             if (other is SphereCollider)
             {
-                /*
+                
                 SphereCollider collider = other as SphereCollider;
 
                 if ((Transform.Position - collider.Transform.Position).LengthSquared()
@@ -23,10 +23,10 @@ namespace CPI311.GameEngine.Physics
                         (Transform.Position - collider.Transform.Position);
                     return true;
                 }
-                */
+                
 
-                return SweptCollides(other, other.Transform.Position - other.Transform.GameObject.Get<Rigidbody>().Velocity
-                               , Transform.Position - Transform.GameObject.Get<Rigidbody>().Velocity, out normal);
+                //return SweptCollides(other, other.Transform.Position - other.Transform.GameObject.Get<Rigidbody>().Velocity
+                //               , Transform.Position - Transform.GameObject.Get<Rigidbody>().Velocity, out normal);
             }
             else if (other is BoxCollider) return other.Collides(this, out normal);
 
